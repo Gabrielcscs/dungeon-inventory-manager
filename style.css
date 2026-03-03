@@ -1,8 +1,124 @@
-.item-card {
-    background-color: #2c2c2c;
+
+:root {
+    /* Variáveis: mude aqui e muda no site todo! */
+    --cor-fundo: #1a1a1a;
+    --cor-card: #2d2d2d;
+    --cor-detalhes: #462a21;
+    --cor-destaque: #f1c40f; /* Amarelo Ouro */
+    --cor-texto: #e0e0e0;
+}
+
+* {
+
+    margin: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--cor-destaque);
+}
+
+
+#logo{
+    max-width: 600px; /* Reduza o tamanho se ele estiver 'atropelando' os inputs */
+    height: auto;
+}
+
+#principal{
+    flex-direction:column;
+    justify-content: space-between;
+}
+
+#principal__geral {
+    float: right;
+    color: var(--cor-texto);
+    margin: 40px;
+    
+    background-color: var(--cor-detalhes);
+    gap: 30px;
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 9px 9px 8px #090605;
+}
+
+.campo__grupo{
+    background-color: var(--cor-detalhes);
+    display: flex;
+    gap: 6px;
+    justify-content: space-between;
+}
+
+label[for="qtd"]{
+    background-color: var(--cor-detalhes);
+}
+
+label[for="nome__item"]{
+    background-color: var(--cor-detalhes);
+}
+#qtd__item{
+    border-radius: 5px;
+    border: none;
+}
+
+#nome__item{
+    border: none;
+    border-radius: 5px;
+}
+
+#botao__adicionar{
+    border: none;
+    background-color: var(--cor-destaque);
+    color:rgb(47, 48, 48);
+    border-radius: 7px;
+    margin-left: 30%;
+    padding: 3px;
+    cursor: pointer;
+    transition: 0.3;
+    
+}
+#botao__adicionar:hover{
+    background-color: #e1b918;
+    transform: scale(1.01)
+}
+#item-lista {
+    
+    background-color: var(--cor-card);
+    border-left: 5px solid var(--cor-texto); /* Aquela bordinha de RPG */
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3); /* Sombra para parecer 3D */
+    
+    display: flex;
+    justify-content: space-between; /* Texto de um lado, botão do outro */
+    align-items: center;
+}
+
+.botao-remover {
+    background-color: #e74c3c; /* Vermelho */
     color: white;
-    padding: 10px;
-    margin-bottom: 8px;
-    border-left: 5px solid gold; /* Estilo de jogo! */
+    border: none;
+    padding: 8px 12px;
     border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s; /* Suaviza a mudança de cor */
+}
+
+.botao-remover:hover {
+    background-color: #c0392b; /* Vermelho mais escuro ao passar o mouse */
+    transform: scale(1.05);    /* Dá um leve "pulo" para frente */
+}
+
+input::placeholder {
+    color: #000000; /* Uma cor que combine com sua dungeon */
+    font-style: italic; /* Deixar em itálico dá um toque legal */
+}
+
+.texto-destaque{
+    color: var(--cor-texto);
+}
+
+#rodape{
+    text-align: center;
 }

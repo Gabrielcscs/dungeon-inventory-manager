@@ -1,6 +1,6 @@
-const inputNome = document.getElementById("nome-item")
-const inputQtd = document.getElementById("qtd-item")
-const botaoAdd = document.getElementById("botao-adicionar")
+const inputNome = document.getElementById("nome__item")
+const inputQtd = document.getElementById("qtd__item")
+const botaoAdd = document.getElementById("botao__adicionar")
 const divBotao = document.getElementById("principal__texto")
 const dadosSalvos = localStorage.getItem("inventarioSalvo")
 
@@ -47,18 +47,18 @@ function atualizarLista(){
     divBotao.innerHTML = ""
     meuInventario.forEach((itens, index) => {
         divBotao.innerHTML += ` 
-            <div>
-                <strong>Nome:</strong> ${itens.nome}
-                <strong>Quantidade:</strong> ${itens.qtd}
+            <div id="item-lista">
+                <strong class="texto-destaque">Nome:</strong> ${itens.nome}
+                <strong class="texto-destaque">Quantidade:</strong> ${itens.qtd}
                 <button class="botao-remover"  data-posicao="${index}">Remover</button>
             </div>
-            <hr>
+ 
         `;
 
     });
     if(meuInventario.length === 0){
         divBotao.innerHTML += `
-        <h1>O seu inventário está vazio, percorra as dungeons atrás de itens</h1>
+        <h1 class"texto-destaque">O seu inventário está vazio, percorra as dungeons atrás de itens</h1>
         `;
     }
 }
