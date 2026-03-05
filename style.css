@@ -10,7 +10,7 @@
 
 * {
 
-    margin: 10px;
+    
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -28,25 +28,29 @@ body {
 
 #principal{
     flex: 1;
-    flex-direction:column;
-    justify-content: space-between;
 }
 
 #principal__geral {
+    display: flex;
+    flex-direction: column;
     float: right;
     color: var(--cor-texto);
     margin: 40px;
     background-color: var(--cor-detalhes);
     gap: 30px;
     border-radius: 25px;
-    padding: 30px;
+    padding: 30px 50px 30px 50px;
     box-shadow: 9px 9px 8px #090605;
+}
+
+#principal__texto{
+    flex: 1;
 }
 
 .campo__grupo{
     background-color: var(--cor-detalhes);
     display: flex;
-    gap: 6px;
+    gap: 20px;
     justify-content: space-between;
 }
 
@@ -89,12 +93,34 @@ label[for="nome__item"]{
     padding: 15px;
     margin: 10px 0;
     border-radius: 8px;
+    max-width: 600px;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0,0,0,0.3); /* Sombra para parecer 3D */
-    
     display: flex;
-    justify-content: space-between; /* Texto de um lado, botão do outro */
+    justify-content: space-between;
     align-items: center;
+    
+}
+
+/* Cria a coluna do Nome */
+.coluna-nome {
+    width: 45%; /* Define que o nome sempre ocupa 45% do card */
+    display: flex;
+    gap: 20px;
+}
+
+/* Cria a coluna da Quantidade */
+.coluna-qtd {
+    width: 35%; /* Define que a quantidade sempre ocupa 35% do card */
+    display: flex;
+    gap: 10px;
+}
+
+/* Estiliza os valores para que eles não "empurrem" os vizinhos */
+.valor-variavel, .valor-variavel-qtd {
+    color: var(--cor-fundos); /* Dá destaque ao que foi digitado */
+    font-weight: bold;
+    white-space: nowrap; 
 }
 
 .botao-remover {
@@ -119,6 +145,10 @@ input::placeholder {
 
 .texto-destaque{
     color: var(--cor-texto);
+}
+
+.texto-vazio{
+    
 }
 
 #rodape{

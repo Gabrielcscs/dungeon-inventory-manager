@@ -48,8 +48,15 @@ function atualizarLista(){
     meuInventario.forEach((itens, index) => {
         divBotao.innerHTML += ` 
             <div id="item-lista">
-                <strong class="texto-destaque">Nome:</strong> ${itens.nome}
-                <strong class="texto-destaque">Quantidade:</strong> ${itens.qtd}
+                <div class="coluna-nome">
+                    <strong class="texto-destaque">Nome:</strong>
+                    <span class="valor-variavel">${itens.nome}</span>
+                </div>    
+
+                <div class="coluna-qtd">    
+                    <strong class="texto-destaque">Quantidade:</strong>
+                    <span class"valor-variavel">${itens.qtd}</span>
+                </div>
                 <button class="botao-remover"  data-posicao="${index}">Remover</button>
             </div>
  
@@ -58,7 +65,7 @@ function atualizarLista(){
     });
     if(meuInventario.length === 0){
         divBotao.innerHTML += `
-        <h1 class"texto-destaque">O seu inventário está vazio, percorra as dungeons atrás de itens</h1>
+        <h1 class"texto-vazio">O seu inventário está vazio, percorra as dungeons atrás de itens</h1>
         `;
     }
 }
