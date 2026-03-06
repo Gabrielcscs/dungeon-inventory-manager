@@ -65,7 +65,9 @@ function atualizarLista(){
     });
     if(meuInventario.length === 0){
         divBotao.innerHTML += `
-        <h1 class"texto-vazio">O seu inventário está vazio, percorra as dungeons atrás de itens</h1>
+        <div class="mensagem-vazia">
+            <i class="icone-bau"></i>
+            <p>O seu inventário está vazio, percorra as dungeons atrás de itens</p>
         `;
     }
 }

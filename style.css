@@ -1,11 +1,11 @@
 
 :root {
     /* Variáveis: mude aqui e muda no site todo! */
-    --cor-fundo: #1a1a1a;
-    --cor-card: #2d2d2d;
-    --cor-detalhes: #462a21;
-    --cor-destaque: #f1c40f; /* Amarelo Ouro */
-    --cor-texto: #e0e0e0;
+    --cor-fundo: #051224;
+    --cor-card: #2A1810;
+    --cor-detalhes: #C5A059;
+    --cor-destaque: #5A6473; /* Amarelo Ouro */
+    --cor-texto: #E8D9B5;
 }
 
 * {
@@ -18,12 +18,13 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100VH;
-    background-color: var(--cor-destaque);
+    background-color: var(--cor-fundo);
 }
 
 
-#logo{
-    max-width: 600px;
+#logo-img{
+    width: 500px;
+    height: 200px;
 }
 
 #principal{
@@ -36,7 +37,7 @@ body {
     float: right;
     color: var(--cor-texto);
     margin: 40px;
-    background-color: var(--cor-detalhes);
+    background-color: var(--cor-card);
     gap: 30px;
     border-radius: 25px;
     padding: 30px 50px 30px 50px;
@@ -44,37 +45,29 @@ body {
 }
 
 #principal__texto{
-    flex: 1;
+    margin: 80px 0px 0px 25px;
 }
 
 .campo__grupo{
-    background-color: var(--cor-detalhes);
+    background-color: var(--cor-card);
     display: flex;
     gap: 20px;
     justify-content: space-between;
 }
 
-label[for="qtd"]{
-    background-color: var(--cor-detalhes);
-}
 
-label[for="nome__item"]{
-    background-color: var(--cor-detalhes);
-}
-#qtd__item{
-    border-radius: 5px;
-    border: none;
-}
 
-#nome__item{
+#nome__item, #qtd__item{
+    background-color: var(--cor-texto);
+    padding: 3px;
     border: none;
     border-radius: 5px;
 }
 
 #botao__adicionar{
-    border: none;
-    background-color: var(--cor-destaque);
-    color:rgb(47, 48, 48);
+    border: 2px solid var(--cor-detalhes);
+    background-color: var(--cor-card);
+    color:var(--cor-texto);
     border-radius: 7px;
     margin-left: 30%;
     padding: 3px;
@@ -83,15 +76,17 @@ label[for="nome__item"]{
     
 }
 #botao__adicionar:hover{
-    background-color: #e1b918;
+    background-color: var(--cor-texto);
+    color: var(--cor-fundo);
     transform: scale(1.01)
 }
+
 #item-lista {
-    
+    color: whitesmoke;
     background-color: var(--cor-card);
     border-left: 5px solid var(--cor-texto); /* Aquela bordinha de RPG */
-    padding: 15px;
-    margin: 10px 0;
+    padding: 20px 15px 20px 15px;
+    margin: 10px;
     border-radius: 8px;
     max-width: 600px;
     width: 100%;
@@ -106,49 +101,67 @@ label[for="nome__item"]{
 .coluna-nome {
     width: 45%; /* Define que o nome sempre ocupa 45% do card */
     display: flex;
-    gap: 20px;
+    gap: 30px;
 }
 
 /* Cria a coluna da Quantidade */
 .coluna-qtd {
     width: 35%; /* Define que a quantidade sempre ocupa 35% do card */
     display: flex;
-    gap: 10px;
+    gap: 30px;
 }
 
-/* Estiliza os valores para que eles não "empurrem" os vizinhos */
-.valor-variavel, .valor-variavel-qtd {
-    color: var(--cor-fundos); /* Dá destaque ao que foi digitado */
-    font-weight: bold;
-    white-space: nowrap; 
-}
+
 
 .botao-remover {
-    background-color: #e74c3c; /* Vermelho */
-    color: white;
+    background-color: #8B1A1A; /* Vermelho */
+    color:var(--cor-texto);
     border: none;
     padding: 8px 12px;
     border-radius: 4px;
     cursor: pointer;
-    transition: 0.3s; /* Suaviza a mudança de cor */
+    transition: 0.3s; 
 }
 
 .botao-remover:hover {
-    background-color: #c0392b; /* Vermelho mais escuro ao passar o mouse */
-    transform: scale(1.05);    /* Dá um leve "pulo" para frente */
+    background-color: #c0392b; 
+    transform: scale(1.05);    
 }
 
 input::placeholder {
-    color: #000000; /* Uma cor que combine com sua dungeon */
-    font-style: italic; /* Deixar em itálico dá um toque legal */
+    color: #1b1919; 
+    font-style: italic; 
 }
 
 .texto-destaque{
     color: var(--cor-texto);
 }
 
+.mensagem-vazia {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    border: 2px dashed var(--cor-detalhes);     
+    border-radius: 15px;
+    color: var(--cor-texto);
+    text-align: center;
+    opacity: 0.8;
+    margin-top: 100px;
+}
 
+.mensagem-vazia p {
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
 
 #rodape{
+    color: var(--cor-detalhes);
     text-align: center;
+}
+
+#link{
+    color: var(--cor-detalhes);
 }
