@@ -2,6 +2,8 @@
 ⚔️ Dungeon Inventory Manager
 Um sistema de gerenciamento de itens reativo, desenvolvido para aventureiros que precisam organizar seus saques de dungeons em tempo real. Este projeto foi criado para consolidar conceitos fundamentais de JavaScript Vanilla e manipulação dinâmica do DOM.
 
+<a href = "https://gabrielcscs.github.io/dungeon-inventory-manager/">Deploy do Inventário</a>
+
 🛠️ Tecnologias Utilizadas
 HTML5: Estruturação semântica.
 
