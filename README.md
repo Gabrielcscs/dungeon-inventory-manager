@@ -29,7 +29,7 @@ Remoção Inteligente: Exclusão de itens específicos utilizando o índice do a
 🚀 Roadmap (Próximos Passos)
 Abaixo estão as melhorias planejadas para evoluir este projeto e aprofundar meus conhecimentos em Front-End:
 
-[ ] UI/UX Temática: Implementação de uma interface inspirada em menus de RPG (Dark Theme/Medieval).
+[x] UI/UX Temática: Implementação de uma interface inspirada em menus de RPG (Dark Theme/Medieval).
 
 [ ] Responsividade: Adaptação do layout para dispositivos móveis (Mobile First).
 
