@@ -1,10 +1,9 @@
 
 :root {
-    /* Variáveis: mude aqui e muda no site todo! */
     --cor-fundo: #051224;
     --cor-card: #2A1810;
     --cor-detalhes: #C5A059;
-    --cor-destaque: #5A6473; /* Amarelo Ouro */
+    --cor-destaque: #5A6473; 
     --cor-texto: #E8D9B5;
 }
 
@@ -23,8 +22,8 @@ body {
 
 
 #logo-img{
-    width: 500px;
-    height: 200px;
+    width: 31rem;
+    height: 12.5rem;
 }
 
 #principal{
@@ -36,22 +35,22 @@ body {
     flex-direction: column;
     float: right;
     color: var(--cor-texto);
-    margin: 40px;
+    margin: 2.5rem;
     background-color: var(--cor-card);
-    gap: 30px;
-    border-radius: 25px;
-    padding: 30px 50px 30px 50px;
+    gap: 1.8rem;
+    border-radius: 1.5em;
+    padding: 1.8rem 3.125rem 1.8rem 3.125rem;
     box-shadow: 9px 9px 8px #090605;
 }
 
 #principal__texto{
-    margin: 80px 0px 0px 25px;
+    margin: 5rem 0rem 0rem 1.28rem;
 }
 
-.campo__grupo{
+.campo__grupo, .campo__grupo__nome{
     background-color: var(--cor-card);
     display: flex;
-    gap: 20px;
+    gap: 1.2rem;
     justify-content: space-between;
 }
 
@@ -59,18 +58,18 @@ body {
 
 #nome__item, #qtd__item{
     background-color: var(--cor-texto);
-    padding: 3px;
+    padding: 0.18rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5em;
 }
 
 #botao__adicionar{
     border: 2px solid var(--cor-detalhes);
     background-color: var(--cor-card);
     color:var(--cor-texto);
-    border-radius: 7px;
-    margin-left: 30%;
-    padding: 3px;
+    border-radius: 0.6em;
+    margin-left: 2rem;
+    padding: 0.18rem;
     cursor: pointer;
     transition: 0.3;
     
@@ -84,41 +83,39 @@ body {
 #item-lista {
     color: whitesmoke;
     background-color: var(--cor-card);
-    border-left: 5px solid var(--cor-texto); /* Aquela bordinha de RPG */
-    padding: 20px 15px 20px 15px;
-    margin: 10px;
-    border-radius: 8px;
-    max-width: 600px;
+    border-left: 5px solid var(--cor-texto); 
+    padding: 1.25rem 1rem 1.25rem 1rem;
+    margin: 0.6;
+    border-radius: 0.6em;
+    max-width: 43%;
     width: 100%;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3); /* Sombra para parecer 3D */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
     display: flex;
     justify-content: space-between;
     align-items: center;
     
 }
 
-/* Cria a coluna do Nome */
 .coluna-nome {
-    width: 45%; /* Define que o nome sempre ocupa 45% do card */
+    width: 30%; 
     display: flex;
-    gap: 30px;
+    gap: 2rem;
 }
 
-/* Cria a coluna da Quantidade */
 .coluna-qtd {
-    width: 35%; /* Define que a quantidade sempre ocupa 35% do card */
+    width: 35%; 
     display: flex;
-    gap: 30px;
+    gap: 2rem;
 }
 
 
 
 .botao-remover {
-    background-color: #8B1A1A; /* Vermelho */
+    background-color: #8B1A1A; 
     color:var(--cor-texto);
     border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5em;
     cursor: pointer;
     transition: 0.3s; 
 }
@@ -142,9 +139,10 @@ input::placeholder {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    max-width: 40%;
+    padding: 2.5rem;
     border: 2px dashed var(--cor-detalhes);     
-    border-radius: 15px;
+    border-radius: 1.5em;
     color: var(--cor-texto);
     text-align: center;
     opacity: 0.8;
@@ -164,4 +162,30 @@ input::placeholder {
 
 #link{
     color: var(--cor-detalhes);
+}
+
+@media (max-width: 768px) {
+
+    #logo{
+       display:none;
+    }
+
+    #principal__geral {
+        float: none;      
+        max-width: 60%;        
+        margin: 1.2rem auto;
+    }
+
+    .campo__grupo__nome{
+        gap: 3.6rem;
+    }
+
+    #item-lista {
+        max-width: 85%;
+    }
+
+    .coluna-nome, .coluna-qtd {
+        width: 100%;
+        gap: 0.5rem; 
+    }
 }
