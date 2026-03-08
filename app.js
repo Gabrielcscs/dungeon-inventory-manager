@@ -68,6 +68,7 @@ function atualizarLista(){
         <div class="mensagem-vazia">
             <i class="icone-bau"></i>
             <p>O seu inventário está vazio, percorra as dungeons atrás de itens</p>
+        </div>
         `;
     }
 }

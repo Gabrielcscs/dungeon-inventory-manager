@@ -29,11 +29,9 @@ Remoção Inteligente: Exclusão de itens específicos utilizando o índice do a
 🚀 Roadmap (Próximos Passos)
 Abaixo estão as melhorias planejadas para evoluir este projeto e aprofundar meus conhecimentos em Front-End:
 
-[x] UI/UX Temática: Implementação de uma interface inspirada em menus de RPG (Dark Theme/Medieval).
+[X] UI/UX Temática: Implementação de uma interface inspirada em menus de RPG (Dark Theme/Medieval).
 
-[ ] Responsividade: Adaptação do layout para dispositivos móveis (Mobile First).
-
-[ ] Sistema de Raridades: Cores dinâmicas nos cards baseadas no nível do item (Comum, Raro, Lendário).
+[X] Responsividade: Adaptação do layout para dispositivos móveis (Mobile First).
 
 [ ] Filtro de Busca: Barra de pesquisa em tempo real para localizar itens rapidamente no inventário.
 

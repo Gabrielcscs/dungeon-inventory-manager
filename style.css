@@ -206,9 +206,15 @@ input::placeholder {
     .campo__grupo__nome{
         gap: 3.15rem;
     }
+    
+    #nome__item, #qtd__item{
+        max-width: 10rem;
+    }
     .campo__grupo{
         gap: 0.7rem;
     }
+
+
 
     #principal__texto{
         font-size: 0.6em;
@@ -230,6 +236,11 @@ input::placeholder {
         font-size: 0.6rem;
     }
     
-    
+    #principal{
+        flex: 0.7;
+    }
+    .mensagem-vazia{
+        margin: 5rem 0rem 0rem 0.5rem;
+    }
 
 }
