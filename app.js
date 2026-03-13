@@ -1,8 +1,10 @@
 const inputNome = document.getElementById("nome__item")
 const inputQtd = document.getElementById("qtd__item")
+const inputBusca = document.getElementById("input__busca")
 const botaoAdd = document.getElementById("botao__adicionar")
 const divBotao = document.getElementById("principal__texto")
 const dadosSalvos = localStorage.getItem("inventarioSalvo")
+const divBusca = document.getElementById("principal__busca")
 
 let meuInventario = JSON.parse(localStorage.getItem("inventarioSalvo")) || [];
 
@@ -47,7 +49,7 @@ function atualizarLista(){
     divBotao.innerHTML = ""
     meuInventario.forEach((itens, index) => {
         divBotao.innerHTML += ` 
-            <div id="item-lista">
+            <div class="item-lista">
                 <div class="coluna-nome">
                     <strong class="texto-destaque">Nome:</strong>
                     <span class="valor-variavel">${itens.nome}</span>
@@ -63,12 +65,19 @@ function atualizarLista(){
         `;
 
     });
-    if(meuInventario.length === 0){
+    if(meuInventario.length === 0){ 
+        divBusca.innerHTML = ""
         divBotao.innerHTML += `
-        <div class="mensagem-vazia">
-            <i class="icone-bau"></i>
-            <p>O seu inventário está vazio, percorra as dungeons atrás de itens</p>
-        </div>
+            <div class="mensagem-vazia">
+                <i class="icone-bau"></i>
+                <p>O seu inventário está vazio, percorra as dungeons atrás de itens</p>
+            </div>
+        `;
+    }else{
+        
+        divBusca.innerHTML = `
+            <input type=text id="input__busca" placeholder="🔍 Buscar item no inventário...">
+            <button id="botao-busca">Buscar</button>
         `;
     }
 }
@@ -82,3 +91,18 @@ function criarItem(nome, quantidade){
     this.nome = nome.trim();
     this.qtd = quantidade;
 }
+
+divBusca.addEventListener('click', (event) => {
+
+    if (event.target.id === 'botao-busca') {
+        const inputBuscaLocal = document.getElementById("input__busca");
+        const termo = inputBuscaLocal.value.toLowerCase();
+        
+        const itens = document.querySelectorAll('.item-lista');
+        
+        itens.forEach(item => {
+            const nomeItem = item.querySelector('.valor-variavel').textContent.toLowerCase();
+            item.style.display = nomeItem.includes(termo) ? 'flex' : 'none';
+        });
+    }
+});

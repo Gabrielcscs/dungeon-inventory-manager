@@ -44,7 +44,7 @@ body {
 }
 
 #principal__texto{
-    margin: 5rem 0rem 0rem 1.28rem;
+    margin: 0rem 0rem 0rem 1.28rem;
 }
 
 .campo__grupo, .campo__grupo__nome{
@@ -80,7 +80,7 @@ body {
     transform: scale(1.01)
 }
 
-#item-lista {
+.item-lista {
     color: whitesmoke;
     background-color: var(--cor-card);
     border-left: 5px solid var(--cor-texto); 
@@ -125,13 +125,48 @@ body {
     transform: scale(1.05);    
 }
 
-input::placeholder {
+#nome__item::placeholder {
     color: #1b1919; 
     font-style: italic; 
 }
 
 .texto-destaque{
     color: var(--cor-texto);
+}
+
+#principal__busca{
+    max-width: 43%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    margin: 5rem 0rem 0rem 2.8rem;
+}
+
+#input__busca{
+    width: 60%;
+    background-color: var(--cor-card);
+    color: var(--cor-texto);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+
+}
+
+#input__busca::placeholder {
+    padding: 0.3rem;
+    background-color: var(--cor-card);
+    color: var(--cor-texto);
+    border-radius: 0.5rem;
+    font-style: italic;
+}
+
+#botao-busca{
+    color: var(--cor-texto);
+    background-color: var(--cor-card);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.7rem;
 }
 
 .mensagem-vazia {
@@ -180,7 +215,7 @@ input::placeholder {
         gap: 3.6rem;
     }
 
-    #item-lista {
+    .item-lista {
         max-width: 85%;
     }
 
@@ -214,14 +249,18 @@ input::placeholder {
         gap: 0.7rem;
     }
 
+    #principal__busca{
+        max-width: none;
+        margin: 3rem 0rem 0rem 1rem;
 
+    }
 
     #principal__texto{
         font-size: 0.6em;
-        margin: 5rem 0rem 0rem 0.28rem;
+        margin: 0px;
     }
 
-    #item__lista{
+    .item__lista{
         padding: 0rem 0rem 0rem 0rem;
 
     }
