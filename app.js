@@ -1,96 +1,47 @@
+
 const inputNome = document.getElementById("nome__item")
 const inputQtd = document.getElementById("qtd__item")
-const inputBusca = document.getElementById("input__busca")
 const botaoAdd = document.getElementById("botao__adicionar")
 const divBotao = document.getElementById("principal__texto")
-const dadosSalvos = localStorage.getItem("inventarioSalvo")
 const divBusca = document.getElementById("principal__busca")
+const mensagemErroServer = "Falha na comunicação com o servidor"
+let meuInventario = [];
 
-let meuInventario = JSON.parse(localStorage.getItem("inventarioSalvo")) || [];
+const urlAPI = "https://dungeon-inventory-manager-api.onrender.com/api/itens";
 
-atualizarLista()
+async function carregarItens() {
+    try {
+        const resposta = await fetch(urlAPI);
+        if (!resposta.ok) throw new Error(mensagemErroServer);
+
+        const itensDoBaco = await resposta.json();
+        
+        meuInventario = itensDoBaco; 
+        
+        console.log("Itens carregados do banco:", meuInventario);
+
+    } catch (erro) {
+        console.error("Houve um problema com a requisição:", erro);
+    }
+    atualizarLista()
+}
+carregarItens()
 
 
 botaoAdd.addEventListener('click', () =>{
-    const nome = inputNome.value;
-    const quantidade = inputQtd.value;
-
-    if (nome.trim() === "" ) {
-        alert("Digite um nome para o item!");
-        return;
-    }else if (quantidade <= 0){
-        alert("Quantidade Inválida")
-    }else if(nome.length > 20){
-        alert("Limite de caracteres excedidos")
-    }else {
-        const novoItem = new criarItem(nome, quantidade);
-        meuInventario.push(novoItem);
-        localStorage.setItem("inventarioSalvo", JSON.stringify(meuInventario))
-        atualizarLista()
-    }
-
-
-    inputNome.value = "";
-    inputQtd.value = 1;
+    adicionarItem()
 })
+
 
 
 divBotao.addEventListener('click', (event) =>{
     const botaoClicado = event.target
 
     if (botaoClicado.classList.contains("botao-remover")){
-        const botaoIndex = Number(event.target.dataset.posicao);
-         removeObjeto(botaoIndex)
-         atualizarLista()
+        const botaoId = Number(event.target.dataset.id);
+         removeObjeto(botaoId)
         }
 })
-
-function atualizarLista(){
-    divBotao.innerHTML = ""
-    meuInventario.forEach((itens, index) => {
-        divBotao.innerHTML += ` 
-            <div class="item-lista">
-                <div class="coluna-nome">
-                    <strong class="texto-destaque">Nome:</strong>
-                    <span class="valor-variavel">${itens.nome}</span>
-                </div>    
-
-                <div class="coluna-qtd">    
-                    <strong class="texto-destaque">Quantidade:</strong>
-                    <span class"valor-variavel">${itens.qtd}</span>
-                </div>
-                <button class="botao-remover"  data-posicao="${index}">Remover</button>
-            </div>
- 
-        `;
-
-    });
-    if(meuInventario.length === 0){ 
-        divBusca.innerHTML = ""
-        divBotao.innerHTML += `
-            <div class="mensagem-vazia">
-                <i class="icone-bau"></i>
-                <p>O seu inventário está vazio, percorra as dungeons atrás de itens</p>
-            </div>
-        `;
-    }else{
-        
-        divBusca.innerHTML = `
-            <input type=text id="input__busca" placeholder="🔍 Buscar item no inventário...">
-            <button id="botao-busca">Buscar</button>
-        `;
-    }
-}
-
-function removeObjeto(indice){
-    meuInventario.splice(indice, 1)
-    localStorage.setItem("inventarioSalvo", JSON.stringify(meuInventario))
-}
-
-function criarItem(nome, quantidade){
-    this.nome = nome.trim();
-    this.qtd = quantidade;
-}
 
 divBusca.addEventListener('click', (event) => {
 
@@ -106,3 +57,104 @@ divBusca.addEventListener('click', (event) => {
         });
     }
 });
+
+function atualizarLista(){
+
+
+    const meuInventarioHTML = meuInventario.map((item) => {
+        return ` 
+            <div class="item-lista">
+                <div class="coluna-nome">
+                    <strong class="texto-destaque">Nome:</strong>
+                    <span class="valor-variavel">${item.nome}</span>
+                </div>    
+
+                <div class="coluna-qtd">    
+                    <strong class="texto-destaque">Quantidade:</strong>
+                    <span class="valor-variavel">${item.quantidade}</span>
+                </div>
+                <button class="botao-remover"  data-id="${item.id}">Remover</button>
+            </div> 
+        `
+    }).join('')
+
+    
+    if(meuInventario.length === 0){ 
+        divBusca.innerHTML = ""
+        divBotao.innerHTML = `
+            <div class="mensagem-vazia">
+                <i class="icone-bau"></i>
+                <p>O seu inventário está vazio, percorra as dungeons atrás de itens</p>
+            </div>
+        `;
+    }else{
+        divBotao.innerHTML = meuInventarioHTML
+        divBusca.innerHTML = `
+            <input type=text id="input__busca" placeholder="🔍 Buscar item no inventário...">
+            <button id="botao-busca">Buscar</button>
+        `;
+    }
+
+    
+}
+
+async function removeObjeto(id){
+    try{
+        const urlRemove = `${urlAPI}/${id}`
+        const resposta = await fetch(urlRemove,{
+            method: "DELETE"
+        })
+        
+        if(resposta.ok){
+            console.log("Item removido do banco")
+            carregarItens()
+        }else{
+            console.error("Exclusão do Item deu erro")
+        }
+
+    } catch(erro){
+        console.error(mensagemErroServer, erro)
+    }
+}
+
+
+
+async function adicionarItem(){
+    
+    const nome = inputNome.value;
+    const quantidade = parseInt(inputQtd.value);
+
+    if (nome.trim() === "" ) {
+        alert("Digite um nome para o item!");
+        return;
+    }else if (quantidade <= 0){
+        alert("Quantidade Inválida")
+    }else if(nome.length > 20){
+        alert("Limite de caracteres excedidos")
+    }else {
+        try{
+        const novoItem = {nome: nome, quantidade: quantidade};
+        const resposta = await fetch(urlAPI, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(novoItem)
+        })
+        if(resposta.ok){
+            console.log(`Sucesso! Item: [${novoItem.nome}] adicionado ao banco`)
+            inputNome.value = "";
+            inputQtd.value = 1;
+            carregarItens()
+        }else{
+            console.error(`Falha! Item: [${novoItem.nome}] não adicionado ao banco`)
+        }
+        
+        }catch(erro){
+            console.error(mensagemErroServer, erro)
+        }
+        
+    }
+
+
+}

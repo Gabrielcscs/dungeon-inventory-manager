@@ -224,7 +224,20 @@ body {
         gap: 0.5rem; 
     }
 
+    #principal__busca{
+        max-width: 50%;
+
+    }
+
     .mensagem-vazia{
+        max-width: 70%;
+
+    }
+
+}
+
+@media(max-Width: 730px){
+    #principal__busca{
         max-width: 70%;
 
     }
