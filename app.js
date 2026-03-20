@@ -127,12 +127,13 @@ async function adicionarItem(){
     if (nome.trim() === "" ) {
         alert("Digite um nome para o item!");
         return;
-    }else if (quantidade <= 0){
+    }else if (isNaN(quantidade) || quantidade <= 0){
         alert("Quantidade Inválida")
     }else if(nome.length > 20){
         alert("Limite de caracteres excedidos")
     }else {
         try{
+        
         const novoItem = {nome: nome, quantidade: quantidade};
         const resposta = await fetch(urlAPI, {
             method: "POST",
