@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
    <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="icon" type="image/png" sizes="64x64" href="icone_site.png">
      <link rel="stylesheet" href="style.css">
-     <title>Lista</title>
+     <title>Dungeon inventory</title>
    </head>
 
    <body>
@@ -15,34 +15,81 @@
 
        <main  id="principal">
 
-        <div id="principal__geral">
+        <div id="tela__inventario">
 
-          <div class="campo__grupo__nome">
-            <label for="nome__item">Nome:</label>
-            <input type="text" id="nome__item" placeholder="Ex: Lacre Sombrio">
+          <div id="tela__inventario__geral">
+
+            <div class="campo__grupo__nome">
+              <label for="nome__item">Nome:</label>
+              <input type="text" id="nome__item" placeholder="Ex: Lacre Sombrio">
+            </div>
+
+            <div class="campo__grupo">
+              <label for="qtd__item">Quantidade:</label>
+              <input type="number" id="qtd__item" min="1" value="1">
+            </div> 
+
+            <button id="botao__adicionar">Adicionar ao Inventário</button>
           </div>
 
-          <div class="campo__grupo">
-            <label for="qtd__item">Quantidade:</label>
-            <input type="number" id="qtd__item" min="1" value="1">
-          </div>  
+          <div id="logo">
+            <img id="logo-img"src="logo_siteS.PNG" alt="logo viking com espada e machado cruzado" width="300" height="200">
+          </div>
 
-          <button id="botao__adicionar">Adicionar ao Inventário</button>
+          <div id="principal__busca"></div>
+          <div id="principal__texto"></div>
+
+        </div>
+
+        <div id="tela__login">
           
-        </div>
+          <div id="tela__login__input">
+            <form id="form__login">
+              <h3 id="mensagem__login">Faça login para acessar seu inventário</h3>
+              <div id="campo__login__user">
+                <h4 id="frase__user">Usuario</h4>
+                <input type="text" id="tela__login__user" placeholder="Ex: Usuario123 ">
+              </div>
 
-        <div id="logo">
-          <img id="logo-img"src="logo_siteS.PNG" alt="logo viking com espada e machado cruzado" width="300" height="200">
-        </div>
-
-        <div id="principal__busca">
-
-        </div>
-
-        <div id="principal__texto">
-          
-        </div>
+              <div id="campo__login__senha">
+                <h4 id="frase__senha">Senha</h4>
+                <input type="password" id="tela__login__senha" placeholder="Ex: minhasenha123">
+              </div>
+              <!--<button onclick="mostrarSenha()">👁</button>-->
+              <button id="botao__entrar">Entrar</button>
+              <div id="tela__login__extra">
+                <div id="tela__login__botoes">
+                  <button id="tela__login__cadastre-se">Cadastre-se</button>
+                  <button id="tela__login__visitante" type="button">Entrar como visitante</button>
+                </div>
+                <span id="tela__login__ou"> ou </span>
+              </div>
+              </form>
               
+          </div>
+        </div>    
+
+        <div id="tela__cadastro">
+          <form id="form__cadastro">
+              <h1 id="mensagem__cadastro">Crie sua conta para obter um inventário</h3>            
+              <div id="campo__cadastro__user">
+                <h4 id="frase__user">Usuário</h4>
+                <input type="text" id="tela__cadastro__user" placeholder="Ex: Usuario123 ">
+              </div>
+
+              <div id="campo__cadastro__email">
+                <h4 id="frase__email">E-mail</h4>
+                <input type="text" id="tela__cadastro__email" placeholder="Ex: seuemail@dungeon.com ">
+              </div>
+
+              <div id="campo__cadastro__senha">
+                <h4 id="frase__senha">Senha</h4>
+                <input type="password" id="tela__cadastro__senha" placeholder="Ex: minhasenha123">
+              </div>
+              <!--<button onclick="mostrarSenha()">👁</button>-->
+              <button id="botao__cadastrar">Cadastrar</button>
+            </form>
+        </div>
 
        </main> 
 

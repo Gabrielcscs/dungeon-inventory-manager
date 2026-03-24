@@ -117,7 +117,10 @@ async function removeObjeto(id){
     }
 }
 
-
+function mostrarSenha() {
+    const campo = document.getElementById('tela__login__input__senha');
+    campo.type = campo.type === 'password' ? 'text' : 'password';
+  }
 
 async function adicionarItem(){
     
