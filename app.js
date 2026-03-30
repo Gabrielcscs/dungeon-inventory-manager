@@ -1,31 +1,37 @@
-
-const inputNome = document.getElementById("nome__item")
-const inputQtd = document.getElementById("qtd__item")
+const telaInve = document.getElementById("tela__inventario")
+const telaLogi = document.getElementById("tela__login")
+const telaCad = document.getElementById("tela__cadastro")
+const botaoCada = document.getElementById("tela__login__cadastre-se")
+const botaoVisiCad = document.getElementById("tela__cadastro__visitante")
+const botaoVisiLog = document.getElementById("tela__login__visitante")
+const botaoLogin = document.getElementById("botao__entrar")
+const botaoCadastrar = document.getElementById("botao__cadastrar")
+const botaoOlhoCad = document.getElementById("botao__olho__cadastro")
+const botaoOlhoLog = document.getElementById("botao__olho__login")
 const botaoAdd = document.getElementById("botao__adicionar")
 const divBotao = document.getElementById("principal__texto")
 const divBusca = document.getElementById("principal__busca")
+const inputCadUser = document.getElementById("tela__cadastro__user")
+const inputCadEmail = document.getElementById("tela__cadastro__email")
+const inputCadSenha = document.getElementById("tela__cadastro__senha")
+const inputLoginUser = document.getElementById("tela__login__user")
+const inputLoginSenha = document.getElementById("tela__login__senha")
+
+const inputNome = document.getElementById("nome__item")
+const inputQtd = document.getElementById("qtd__item")
 const mensagemErroServer = "Falha na comunicação com o servidor"
 let meuInventario = [];
 
-const urlAPI = "https://dungeon-inventory-manager-api.onrender.com/api/itens";
+const urlitensLocal = "https://dungeon-inventory-manager-api.onrender.com/api/itens"
+const urlUsuariosLocal = "https://dungeon-inventory-manager-api.onrender.com/api/usuarios"
 
-async function carregarItens() {
-    try {
-        const resposta = await fetch(urlAPI);
-        if (!resposta.ok) throw new Error(mensagemErroServer);
-
-        const itensDoBaco = await resposta.json();
-        
-        meuInventario = itensDoBaco; 
-        
-        console.log("Itens carregados do banco:", meuInventario);
-
-    } catch (erro) {
-        console.error("Houve um problema com a requisição:", erro);
-    }
-    atualizarLista()
+const credencial = localStorage.getItem("usuario_id")
+if(credencial != "null"){
+    carregarItens()
+    mostrarTela(telaInve)
+}else{
+    mostrarTela(telaLogi)
 }
-carregarItens()
 
 
 botaoAdd.addEventListener('click', () =>{
@@ -57,6 +63,103 @@ divBusca.addEventListener('click', (event) => {
         });
     }
 });
+
+botaoOlhoCad.addEventListener('click', (event) =>{
+    const input = document.getElementById("tela__cadastro__senha")
+    mostrarSenha(input)
+})
+
+botaoOlhoLog.addEventListener('click', (event) => {
+    const input = document.getElementById("tela__login__senha")
+    mostrarSenha(input)
+    })
+
+botaoCada.addEventListener('click', () =>{
+    mostrarTela(telaCad)
+})
+
+botaoVisiCad.addEventListener('click', () =>{
+    //mostrarTela(telaInve)
+})
+
+botaoVisiLog.addEventListener('click', () =>{
+    //mostrarTela(telaInve)
+})
+
+botaoCadastrar.addEventListener('click', cadastraUsuario)
+botaoLogin.addEventListener('click', logarUsuarios)
+
+async function logarUsuarios(event){
+    event.preventDefault();
+    if(inputLoginUser.value.trim() === ""){
+        alert("Digite o usuario!")
+    }else if(inputLoginSenha.value.trim() === ""){
+        alert("Digite a senha!")
+    }else{
+        login = {
+                username: inputLoginUser.value.trim(), 
+                senha: inputLoginSenha.value.trim()
+            }
+
+        try{
+            const resposta = await fetch(`${urlUsuariosLocal}/login`,{
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(login)
+            })
+            const retorno = await resposta.text()
+            const dadosRetornados =  (retorno != "") ? JSON.parse(retorno) : null;
+            
+            if(dadosRetornados === null){
+                alert("Usuario ou Senha Incorretos ou Inexistentes!")
+
+            }else{
+
+                localStorage.setItem("usuario_id",dadosRetornados.id )
+                inputLoginSenha.value = ""
+                inputLoginUser.value = ""
+                mostrarTela(telaInve)
+            }
+
+        }catch(erro){
+            console.log(erro)
+            alert(mensagemErroServer,erro)
+        }
+    } 
+}
+
+async function carregarItens() {
+    try {
+        atualizarLista()
+        const resposta = await fetch(`${urlitensLocal}/usuario/${credencial}`);
+        if (!resposta.ok) throw new Error(mensagemErroServer);
+
+        const itensDoBanco = await resposta.json();
+        meuInventario = itensDoBanco; 
+        
+        console.log("Itens carregados do banco:", meuInventario);
+
+    } catch (erro) {
+        console.error("Houve um problema com a requisição:", erro);
+    }
+    atualizarLista()
+}
+
+function mostrarTela(telaMostra){
+    telaInve.style.display= "none"
+    telaLogi.style.display= "none"
+    telaCad.style.display= "none"
+
+    telaMostra.style.display = "block"
+
+}   
+
+function mostrarSenha(input) {
+    input.type = input.type === 'password' ? 'text' : 'password';
+  
+}
 
 function atualizarLista(){
 
@@ -91,22 +194,68 @@ function atualizarLista(){
         divBotao.innerHTML = meuInventarioHTML
         divBusca.innerHTML = `
             <input type=text id="input__busca" placeholder="🔍 Buscar item no inventário...">
-            <button id="botao-busca">Buscar</button>
+            <button id="botao__busca">Buscar</button>
         `;
     }
 
     
 }
 
-async function removeObjeto(id){
+async function cadastraUsuario(event) {
+    event.preventDefault();
+    const username = inputCadUser.value.trim();
+    const email = inputCadEmail.value.trim();
+    const senha = inputCadSenha.value.trim();
+    if(username === "" || email === "" || senha === ""){
+        alert("Preencha todos os campos para se cadastrar!")
+        return
+    }
+
+    const novoUsuario = {
+        username: username,
+        email: email,
+        senha: senha
+    }
     try{
-        const urlRemove = `${urlAPI}/${id}`
+        const urlcadastro = `${urlUsuariosLocal}/cadastrar`
+        const resposta = await fetch(urlcadastro,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(novoUsuario)
+        })
+
+        const textoResposta = await resposta.text()
+        const dadosRetornados = textoResposta ? JSON.parse(textoResposta) : null;
+
+        if(dadosRetornados){
+            alert("Sucesso! Guerreiro cadastrado. Faça seu login para acessa o seu inventário")
+            
+            inputCadUser.value = ""
+            inputCadEmail.value = ""
+            inputCadSenha.value = ""
+            mostrarTela(telaLogi);
+
+        }else {
+            alert("Esse nome de usuário já existe no reino! Escolha outro.");
+        }
+    }catch(erro){
+        console.error("Erro no cadastro:", erro)
+        alert(mensagemErroServer)
+    }
+}
+
+async function removeObjeto(id){
+    const usuario_id = localStorage.getItem("usuario_id")
+    try{
+        const urlRemove = `${urlitensLocal}/${usuario_id}/${id}`
         const resposta = await fetch(urlRemove,{
             method: "DELETE"
         })
         
         if(resposta.ok){
-            console.log("Item removido do banco")
+            console.log(`Item ${meuInventario[id]} removido do banco`)
             carregarItens()
         }else{
             console.error("Exclusão do Item deu erro")
@@ -117,15 +266,11 @@ async function removeObjeto(id){
     }
 }
 
-function mostrarSenha() {
-    const campo = document.getElementById('tela__login__input__senha');
-    campo.type = campo.type === 'password' ? 'text' : 'password';
-  }
-
 async function adicionarItem(){
     
     const nome = inputNome.value;
     const quantidade = parseInt(inputQtd.value);
+    const id = localStorage.getItem("usuario_id")
 
     if (nome.trim() === "" ) {
         alert("Digite um nome para o item!");
@@ -136,9 +281,9 @@ async function adicionarItem(){
         alert("Limite de caracteres excedidos")
     }else {
         try{
-        
+        const usuario_id = localStorage.getItem("usuario_id")
         const novoItem = {nome: nome, quantidade: quantidade};
-        const resposta = await fetch(urlAPI, {
+        const resposta = await fetch(`${urlitensLocal}/usuario/${usuario_id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
