@@ -43,7 +43,25 @@ body {
 #tela__inventario, #tela__cadastro{
     display: none;
 }
+#div__sair{
+    display: flex;
+    justify-content:flex-end;
+}
+#botao__sair{
+    border: none;
+    background-color: var(--cor-card);
+    color:var(--cor-texto);
+    border-radius: 0.6em;
+    padding: 0.48rem;
+    cursor: pointer;
+    transition: 0.3;
+}
 
+#botao__sair:hover{
+    background-color: var(--cor-texto);
+    color: var(--cor-fundo);
+    transform: scale(1.05)
+}
 #tela__inventario__geral {
     display: flex;
     flex-direction: column;

@@ -8,6 +8,7 @@ const botaoLogin = document.getElementById("botao__entrar")
 const botaoCadastrar = document.getElementById("botao__cadastrar")
 const botaoOlhoCad = document.getElementById("botao__olho__cadastro")
 const botaoOlhoLog = document.getElementById("botao__olho__login")
+const botaoSair = document.getElementById("botao__sair")
 const botaoAdd = document.getElementById("botao__adicionar")
 const divBotao = document.getElementById("principal__texto")
 const divBusca = document.getElementById("principal__busca")
@@ -26,7 +27,8 @@ const urlitensLocal = "https://dungeon-inventory-manager-api.onrender.com/api/it
 const urlUsuariosLocal = "https://dungeon-inventory-manager-api.onrender.com/api/usuarios"
 
 const credencial = localStorage.getItem("usuario_id")
-if(credencial != "null"){
+const credencialVal = parseInt(credencial)
+if(credencialVal >= 0){
     carregarItens()
     mostrarTela(telaInve)
 }else{
@@ -88,6 +90,7 @@ botaoVisiLog.addEventListener('click', () =>{
 
 botaoCadastrar.addEventListener('click', cadastraUsuario)
 botaoLogin.addEventListener('click', logarUsuarios)
+botaoSair.addEventListener('click', sair)
 
 async function logarUsuarios(event){
     event.preventDefault();
@@ -118,10 +121,14 @@ async function logarUsuarios(event){
             }else{
 
                 localStorage.setItem("usuario_id",dadosRetornados.id )
+
                 inputLoginSenha.value = ""
                 inputLoginUser.value = ""
+
+                carregarItens()
                 mostrarTela(telaInve)
             }
+
 
         }catch(erro){
             console.log(erro)
@@ -130,9 +137,14 @@ async function logarUsuarios(event){
     } 
 }
 
+function sair(){
+    localStorage.removeItem("usuario_id")
+    mostrarTela(telaLogi)
+}
+
 async function carregarItens() {
     try {
-        atualizarLista()
+        const credencial = localStorage.getItem("usuario_id")
         const resposta = await fetch(`${urlitensLocal}/usuario/${credencial}`);
         if (!resposta.ok) throw new Error(mensagemErroServer);
 
@@ -255,7 +267,7 @@ async function removeObjeto(id){
         })
         
         if(resposta.ok){
-            console.log(`Item ${meuInventario[id]} removido do banco`)
+            console.log(`Item removido do banco`)
             carregarItens()
         }else{
             console.error("Exclusão do Item deu erro")
